@@ -27,7 +27,8 @@ resource "aws_s3_bucket" "website_bucket" {
 # }
 
 resource "aws_s3_bucket_public_access_block" "website_bucket_access" {
-  bucket = aws_s3_bucket.website_bucket.id
+  provider = aws.ap-southeast-1
+  bucket   = aws_s3_bucket.website_bucket.id
 
   block_public_acls       = true
   block_public_policy     = true
