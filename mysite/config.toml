@@ -1,4 +1,4 @@
-baseURL = 'https://d7sslkuyyg05o.cloudfront.net/'
+baseURL = ''
 languageCode = 'en-us'
 title = 'PanawutNC'
 theme = 'devRes'
