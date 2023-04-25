@@ -1,0 +1,139 @@
+banner:
+  text: Panawut Poungsil
+  # photo: img/profile-image.webp
+  links:
+    - url: https://github.com/PacmanNC
+      icon: fab fa-github
+      text: GitHub
+    - url: mailto:panawut.nc.biz@gmail.com
+      icon: fab fa-google
+      text: Email
+
+aboutMe:
+  enable: True
+  text: Panawut Poungsil
+  text2: Cloud Engineer/Devops Engineer, Bangkok
+  list:
+    enable: False
+    items:
+      - text: 
+
+work:
+  enable: True
+  items:
+    - position: DevOps Engineer
+      employerName: Convolab
+      employerUrl: https://th.linkedin.com/company/convolab
+      timeStart: 2018
+      timeEnd: 2020
+      text: 
+      list:
+        enable: True
+        items:
+          - text: Managed and provised infrastructures(development, uat, and production environment) on AWS and GCP.
+          - text: Configured and managed containerization technologies like Docker and Kubernetes.
+          - text: Incident monitoring with alert integration and incident responding using monitoring tools such as Grafana, Prometheus, Kubernetes Dashboard, Datadog.
+          - text: Automate tasks using scripting languages such as Bash, Python.
+          - text: Cloud infrastructure cost management.
+          - text: Implemented and maintained CI/CD pipelines using Github, CircleCI, Node-Red. Integrated smoke testing in pipelines using Mocha.js. CD pipelines integration to automated provisioning application on Kubernetes.
+          - text: Designed chatbot's workflow from customer requirements and implemented chatbot using company's chatbot platform.
+          - text: Integrated chatbot platform with customer's databases and APIs using Node-Red, javascript.
+          - text: Bug fixed and added new features to chatbot platform using Node.js.
+          - text: Provided technical support to customers about chatbot platform and infrastructure.
+    - position: Game and Backend Developer
+      employerName: Donuts Bangkok
+      employerUrl: https://th.linkedin.com/company/donuts-bangkok-co-ltd-
+      timeStart: 2013
+      timeEnd: 2017
+      text:
+      list:
+        enable: True
+        items:
+          - text: Updated and maintained game servers on apache using php, and also implemented new features.
+          - text: Mysql database administration.
+          - text: Wrote scripts for deployment, migration, and data analysis using bash.
+          - text: Developed a mobile game using Cocos2dx.
+          - text: Development and localisation of mobile games using Xcode and Android Studio, released on both the Android and iOS platforms.
+
+education:
+  enable: True
+  items:
+    - course: Bachelor of Science in ICT (Information and Communication Technology)
+      schoolName: Faculty of Information and Communication Technology, Mahidol University
+      schoolUrl: https://www.ict.mahidol.ac.th/
+      timeEnd: 2013
+      text:
+      list:
+        enable: True
+        items:
+          - text: Major in Database and Intelligent Systems.
+          - text: 3.61 GPA
+
+skills:
+  enable: True
+  items:
+    - family: 
+      items:
+        - icon: <i class="devicon devicon-javascript-plain"></i>
+          text: Javascript
+        - icon: <i class="devicon devicon-nodejs-plain"></i>
+          text: Node.js
+        - icon: <i class="devicon devicon-bash-plain"></i>
+          text: Bash
+        - icon: <i class="devicon devicon-python-plain"></i>
+          text: Python (Boto3)
+        - icon: <i class="devicon devicon-cypress-plain"></i>
+          text: Cypress
+        - icon: <i class="devicon devicon-mocha-plain"></i>
+          text: Mocha.js
+    - family: 
+      items:
+        - icon: <i class="devicon devicon-terraform-plain"></i>
+          text: Terraform
+        - icon: <i class="devicon devicon-docker-plain"></i>
+          text: Docker
+        - icon: <i class="devicon devicon-kubernetes-plain"></i>
+          text: Kubernetes
+        - icon: <i class="devicon devicon-grafana-original"></i>
+          text: Grafana
+        - icon: <i class="devicon devicon-grafana-original"></i>
+          text: Prometheus
+    - family: 
+      items:
+        - icon: <i class="devicon devicon-amazonwebservices-plain"></i>
+          text: AWS (Lambda, DynamoDB, S3, Cloudfront, API Gateway, Route53, IAM, AWS Organization, EC2)
+    - family: 
+      items:
+        - icon: <i class="devicon devicon-vscode-plain"></i>
+          text: VSCode
+        - icon: <i class="devicon devicon-linux-plain"></i>
+          text: Linux
+        - icon: <i class="devicon devicon-git-plain"></i>
+          text: Git
+        - icon: <i class="devicon devicon-github-original"></i>
+          text: GitHub (Github Action)
+        - icon: <i class="devicon devicon-circleci-original"></i>
+          text: CircleCI
+        - icon: <i class="devicon devicon-cloudflare-plain"></i>
+          text: Cloudflare
+    - family: 
+      items:
+        - icon: <i class="devicon devicon-mysql-plain"></i>
+          text: MySQL
+        - icon: <i class="devicon devicon-elasticsearch-plain"></i>
+          text: Elasticsearch
+
+projects:
+  enable: True
+  githubUsername: PacmanNC
+  repos:
+  - url: visitor-lambda-tf
+    name: Visitor counter on AWS Lambda with Terraform 
+  - url: static-web-tf
+    name: Static site for resume using Hugo on AWS with Terraform
+
+blog:
+  enable: False
+  url: 
+  sitemapUrl: 
+  numberOfPosts: 4

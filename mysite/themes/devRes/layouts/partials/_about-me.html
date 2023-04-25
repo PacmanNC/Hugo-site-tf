@@ -1,0 +1,24 @@
+{{ if .Site.Data.content.aboutMe.enable }}
+  <div class="about-me">
+    <button class="uk-icon-button" uk-icon="paint-bucket" type="button" onClick="switchTheme(this)" aria-label="Switch Theme"></button> 
+    <span class="category-header">
+      <i class="fas fa-user fa-2x"></i>
+      <h2>About Me</h2>
+      <div class="visitor" id="counter"></div>
+      <div onload="postVisitor()"></div>
+    </span>
+
+    <div>
+      <p class="intro">{{ .Site.Data.content.aboutMe.text | safeHTML }}</p>
+      <p class="intro2">{{ .Site.Data.content.aboutMe.text2 | safeHTML }}</p>
+      {{ if .Site.Data.content.aboutMe.list.enable }}
+      <ul>
+        {{ range .Site.Data.content.aboutMe.list.items }}
+          <li>{{ .text }}</li>
+        {{ end }}
+      </ul>
+      {{ end }}
+    </div>
+  </div>
+  <hr>
+{{ end }}
