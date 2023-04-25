@@ -37,6 +37,7 @@ resource "aws_s3_bucket_public_access_block" "website_bucket_access" {
 }
 
 resource "aws_s3_bucket_policy" "allow_s3_cloudfront_traffic_policy" {
+  provider = aws.ap-southeast-1
   bucket = aws_s3_bucket.website_bucket.id
 
   policy = jsonencode({
