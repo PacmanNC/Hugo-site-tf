@@ -16,7 +16,7 @@ resource "aws_cloudfront_distribution" "cloudfront" {
 
   origin {
     domain_name              = aws_s3_bucket.website_bucket.bucket_regional_domain_name
-    origin_id                = aws_s3_bucket.website_bucket.bucket_regional_domain_name # local.s3_origin_id
+    origin_id                = aws_s3_bucket.website_bucket.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.cloudfront_s3_origin_access_control.id
   }
 
@@ -37,7 +37,7 @@ resource "aws_cloudfront_distribution" "cloudfront" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = aws_s3_bucket.website_bucket.bucket_regional_domain_name # local.s3_origin_id
+    target_origin_id = aws_s3_bucket.website_bucket.bucket_regional_domain_name
 
     forwarded_values {
       query_string = false
