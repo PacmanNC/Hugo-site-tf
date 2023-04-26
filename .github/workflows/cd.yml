@@ -108,12 +108,12 @@ jobs:
           path: cypress/screenshots
 
       # terraform destroy
-      # - name: Terraform Destroy
-      #   id: destroy
-      #   if: ${{ steps.cypress.outcome == 'success' }}
-      #   run: |
-      #     terraform destroy \
-      #       -var='s3_region=${{ vars.REGION }}' \
-      #       -var='website_bucket_name=${{ vars.DEV_WEBSITE_BUCKET_NAME }}' \
-      #       -var='use_cloudfront_address=1' \
-      #       -refresh=false  -no-color -auto-approve
+      - name: Terraform Destroy
+        id: destroy
+        if: ${{ steps.cypress.outcome == 'success' }}
+        run: |
+          terraform destroy \
+            -var='s3_region=${{ vars.REGION }}' \
+            -var='website_bucket_name=${{ vars.DEV_WEBSITE_BUCKET_NAME }}' \
+            -var='use_cloudfront_address=1' \
+            -refresh=false  -no-color -auto-approve
