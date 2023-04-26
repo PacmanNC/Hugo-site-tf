@@ -92,7 +92,7 @@ jobs:
       - name: Build Hugo
         run: |
           cd ../mysite
-          sed -i "/endpoint/c\var endpoint = '${{ vars.VISITOR_API_DEV }}'" ../mysite/config.toml
+          sed -i "/endpoint/c\var endpoint = '${{ vars.VISITOR_API_DEV }}'" ./themes/devRes/layouts/partials/footer.html
           hugo --minify
           aws s3 sync ./public s3://${{ vars.DEV_WEBSITE_BUCKET_NAME }}/
           aws cloudfront create-invalidation --distribution-id ${{ env.CF_ID }} --paths "/*"
