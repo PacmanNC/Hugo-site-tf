@@ -74,7 +74,7 @@ jobs:
           terraform apply plan.out
           URL=$(terraform output -raw url)
           echo "CYPRESS_TEST_URL=${URL}" >> $GITHUB_ENV
-          sed -i '/baseURL/c\baseURL = "'${URL}'"' ../mysite/config.toml
+          sed -i "/baseURL/c\baseURL = '${URL}'" ../mysite/config.toml
         continue-on-error: true
 
       - name: Terraform Apply Status
@@ -105,12 +105,12 @@ jobs:
           path: cypress/screenshots
 
       # terraform destroy
-      - name: Terraform Destroy
-        id: destroy
-        if: ${{ steps.cypress.outcome == 'success' }}
-        run: |
-          terraform destroy \
-            -var='s3_region=${{ vars.REGION }}' \
-            -var='website_bucket_name=${{ vars.DEV_WEBSITE_BUCKET_NAME }}' \
-            -var='use_cloudfront_address=1' \
-            -refresh=false  -no-color -auto-approve
+      # - name: Terraform Destroy
+      #   id: destroy
+      #   if: ${{ steps.cypress.outcome == 'success' }}
+      #   run: |
+      #     terraform destroy \
+      #       -var='s3_region=${{ vars.REGION }}' \
+      #       -var='website_bucket_name=${{ vars.DEV_WEBSITE_BUCKET_NAME }}' \
+      #       -var='use_cloudfront_address=1' \
+      #       -refresh=false  -no-color -auto-approve
