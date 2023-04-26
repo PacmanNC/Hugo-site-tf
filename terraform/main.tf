@@ -27,6 +27,10 @@ locals {
   alias_cloudfront_domain_names   = var.use_cloudfront_address ? [] : [var.website_domain_name, "www.${var.website_domain_name}"]
 }
 
+output "cloudfront_id" {
+  value = aws_cloudfront_distribution.cloudfront.id
+}
+
 output "url" {
   value = aws_cloudfront_distribution.cloudfront.domain_name
 }
