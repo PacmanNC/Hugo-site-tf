@@ -51,7 +51,8 @@ var requestOptions = {
   },
 };
 
-async function postVisitor(url = 'https://lk4e5ls4od.execute-api.ap-southeast-1.amazonaws.com/dev/visitor', payload = {}) {
+var endpoint = '';
+async function postVisitor(url = endpoint, payload = {}) {
   const response = await fetch(url, requestOptions);
   const data = await response.json();
   const html = "<p>You are visitor number : " + data + "</p>";
