@@ -73,6 +73,7 @@ jobs:
         run: |
           terraform apply plan.out
           CF_ID=$(terraform output -raw cloudfront_id)
+          echo "CF_ID=${CF_ID}" >> $GITHUB_ENV
           URL=$(terraform output -raw url)
           echo "CYPRESS_TEST_URL=${URL}" >> $GITHUB_ENV
         continue-on-error: true
@@ -93,7 +94,7 @@ jobs:
           cd ../mysite
           hugo --minify
           aws s3 sync ./public s3://${{ vars.DEV_WEBSITE_BUCKET_NAME }}/
-          aws cloudfront create-invalidation --distribution-id ${CF_ID} --paths "/*"
+          aws cloudfront create-invalidation --distribution-id ${{ env.CF_ID }} --paths "/*"
 
       # cypress
       - name: Cypress run
