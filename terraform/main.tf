@@ -9,8 +9,8 @@ terraform {
 
 # AWS provider for resources
 provider "aws" {
-  alias  = "ap-southeast-1"
-  region = "ap-southeast-1"
+  alias  = var.s3_region
+  region = var.s3_region
 }
 
 # AWS provider zone for SSL certificates

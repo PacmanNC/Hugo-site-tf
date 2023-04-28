@@ -4,12 +4,6 @@ variable "s3_region" {
   default     = "ap-southeast-1"
 }
 
-variable "cert_region" {
-  type        = string
-  description = "cert region"
-  default     = "us-east-1"
-}
-
 variable "website_domain_name" {
   type        = string
   description = "domain name"
