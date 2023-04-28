@@ -9,7 +9,7 @@ terraform {
 
 # AWS provider for resources
 provider "aws" {
-  alias  = var.s3_region
+  alias  = "ap-southeast-1"
   region = var.s3_region
 }
 
