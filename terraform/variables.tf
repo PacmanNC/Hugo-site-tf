@@ -25,12 +25,6 @@ variable "use_cloudfront_address" {
   description = "Use CloudFront address without Route53 and ACM"
 }
 
-variable "hosted_zone" {
-  type        = string
-  description = "Route53 hosted zone"
-  default     = ""
-}
-
 variable "acm_certificate_domain" {
   description = "Domain of the ACM certificate"
   default     = null

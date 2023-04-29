@@ -1,6 +1,5 @@
 # S3 Static Website
 resource "aws_s3_bucket" "website_bucket" {
-  provider      = aws.ap-southeast-1
   bucket        = var.website_bucket_name
   force_destroy = true
 }
@@ -27,7 +26,6 @@ resource "aws_s3_bucket" "website_bucket" {
 # }
 
 resource "aws_s3_bucket_public_access_block" "website_bucket_access" {
-  provider = aws.ap-southeast-1
   bucket   = aws_s3_bucket.website_bucket.id
 
   block_public_acls       = true
@@ -37,7 +35,6 @@ resource "aws_s3_bucket_public_access_block" "website_bucket_access" {
 }
 
 resource "aws_s3_bucket_policy" "allow_s3_cloudfront_traffic_policy" {
-  provider = aws.ap-southeast-1
   bucket = aws_s3_bucket.website_bucket.id
 
   policy = jsonencode({

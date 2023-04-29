@@ -1,0 +1,108 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: build prod
+    permissions:
+      id-token: write
+      contents: read
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform
+
+    steps:
+      - name: Check out Git Repository
+        uses: actions/checkout@v3
+
+      # OIDC
+      - name: GitHub Actions OIDC to AWS Roles
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: us-east-1
+          role-to-assume: ${{ secrets.ASSUME_ROLE_PROD }}
+          role-session-name: github-hugo-site-session
+
+      # Terraform remote backend state
+      - name: Terraform S3 Backend
+        id: create
+        run: aws s3api create-bucket --bucket ${{ secrets.S3_TF_PROD }} --region ${{ vars.REGION }} --create-bucket-configuration LocationConstraint=${{ vars.REGION }}
+        continue-on-error: true
+
+      # Terraform
+      - name: Terraform Setup
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false
+
+      - name: Terraform Init
+        id: init
+        run: |
+          terraform init \
+            -backend-config='bucket=${{ secrets.S3_TF_PROD }}' \
+            -backend-config='key=${{ secrets.KEY_S3_TF_PROD }}' \
+            -backend-config='region=${{ vars.REGION }}'
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          terraform plan \
+            -var='s3_region=${{ vars.REGION }}' \
+            -var='website_bucket_name=${{ vars.PROD_WEBSITE_BUCKET_NAME }}' \
+            -var='use_cloudfront_address=0' \
+            -var='website_domain_name=${{ vars.WEBSITE_DOMAIN_NAME }}'
+            -var='website_domain_name_alternative=${{ vars.WEBSITE_DOMAIN_NAME_ALT }}'
+            -refresh=false  -no-color -out=plan.out
+        continue-on-error: false
+
+      - name: Terraform Plan Status
+        if: ${{ steps.plan.outcome == 'failure' }}
+        run: exit 1
+
+      - name: Terraform Apply
+        id: apply
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          terraform apply plan.out
+          CF_ID=$(terraform output -raw cloudfront_id)
+          echo "CF_ID=${CF_ID}" >> $GITHUB_ENV
+          URL=$(terraform output -raw url)
+          echo "CYPRESS_TEST_URL=${URL}" >> $GITHUB_ENV
+        continue-on-error: true
+
+      - name: Terraform Apply Status
+        if: ${{ steps.apply.outcome == 'failure' }}
+        run: exit 1
+
+      # Hugo
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.111.3"
+          extended: true
+
+      - name: Build Hugo
+        run: |
+          cd ../mysite
+          sed -i "/var endpoint/c\var endpoint = '${{ vars.VISITOR_API_PROD }}'" ./themes/devRes/layouts/partials/footer.html
+          hugo --minify
+          aws s3 sync ./public s3://${{ vars.PROD_WEBSITE_BUCKET_NAME }}/
+          aws cloudfront create-invalidation --distribution-id ${{ env.CF_ID }} --paths "/*"
+
+      # cypress
+      - name: Cypress run
+        id: cypress
+        uses: cypress-io/github-action@v5
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
