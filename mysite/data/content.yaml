@@ -2,6 +2,9 @@ banner:
   text: Panawut Poungsil
   # photo: img/profile-image.webp
   links:
+    - url: /nc_resume.pdf
+      icon: fa fa-file-pdf-o	
+      text: PDF
     - url: https://github.com/PacmanNC
       icon: fab fa-github
       text: GitHub
