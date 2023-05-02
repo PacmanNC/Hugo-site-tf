@@ -15,7 +15,7 @@ banner:
 aboutMe:
   enable: True
   text: Panawut Poungsil
-  text2: Cloud Engineer/Devops Engineer, Bangkok
+  text2: Cloud/Devops Engineer
   list:
     enable: False
     items:
@@ -132,7 +132,7 @@ projects:
   repos:
   - url: visitor-lambda-tf
     name: Visitor counter on AWS Lambda with Terraform 
-  - url: static-web-tf
+  - url: Hugo-site-tf
     name: Static site for resume using Hugo on AWS with Terraform
 
 blog:
