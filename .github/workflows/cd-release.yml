@@ -1,3 +1,5 @@
+name: cd-release
+
 on:
   push:
     branches:
