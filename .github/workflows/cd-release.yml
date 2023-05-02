@@ -59,8 +59,8 @@ jobs:
             -var='s3_region=${{ vars.REGION }}' \
             -var='website_bucket_name=${{ vars.PROD_WEBSITE_BUCKET_NAME }}' \
             -var='use_cloudfront_address=0' \
-            -var='website_domain_name=${{ vars.WEBSITE_DOMAIN_NAME }}'
-            -var='website_domain_name_alternative=${{ vars.WEBSITE_DOMAIN_NAME_ALT }}'
+            -var='website_domain_name=${{ vars.WEBSITE_DOMAIN_NAME }}' \
+            -var='website_domain_name_alternative=${{ vars.WEBSITE_DOMAIN_NAME_ALT }}' \
             -refresh=false  -no-color -out=plan.out
         continue-on-error: false
 
